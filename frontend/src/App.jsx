@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-     <div className="text-2xl font-bold text-blue-600">Ayaz Hussain</div>
+     <div className="text-2xl font-bold text-blue-600">project</div>
       <Home />
     </>
   )
