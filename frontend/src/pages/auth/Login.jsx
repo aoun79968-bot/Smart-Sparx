@@ -8,12 +8,13 @@ export default function Login() {
 
   const handleLogin = () => {
     const storedUser = JSON.parse(localStorage.getItem("smartUser"));
-
     if (!storedUser) return alert("No user found. Please register.");
 
     if (email === storedUser.email && password === storedUser.password) {
+      // Save login status AND current user info
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/");
+      localStorage.setItem("currentUser", JSON.stringify(storedUser));
+      navigate("/profile"); // redirect to profile page
     } else {
       alert("Invalid credentials");
     }

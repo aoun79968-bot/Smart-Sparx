@@ -2,14 +2,15 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    if (!email || !password) return alert("Fill all fields");
+    if (!name || !email || !password) return alert("Fill all fields");
 
-    const user = { email, password };
+    const user = { name, email, password };
     localStorage.setItem("smartUser", JSON.stringify(user));
 
     alert("Registered successfully!");
@@ -20,6 +21,13 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-xl w-96 shadow-lg">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+
+        <input
+          className="w-full p-2 mb-4 rounded bg-gray-700"
+          type="text"
+          placeholder="Full Name"
+          onChange={(e) => setName(e.target.value)}
+        />
 
         <input
           className="w-full p-2 mb-4 rounded bg-gray-700"

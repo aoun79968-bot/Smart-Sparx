@@ -1,25 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    setUser(currentUser);
+  }, []);
+
+  const initials = user
+    ? user.name
+      ? user.name
+          .split(" ")
+          .map((n) => n[0])
+          .join("")
+          .toUpperCase()
+      : user.email[0].toUpperCase()
+    : "SS";
+
+  const displayName = user ? user.name || user.email : "Smart Sparx";
+
   return (
-    <nav className="w-full bg-gradient-to-r from-sky-600 via-indigo-600 to-violet-600 text-white shadow-md">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center font-bold">SS</div>
-          <Link to="/" className="text-lg font-semibold">Smart Sparx</Link>
+    <nav className="bg-purple-600 p-4 flex justify-between items-center">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white">
+          {initials}
         </div>
-        <div className="hidden md:flex items-center gap-6 text-sm opacity-95">
-          <Link to="/" className="hover:underline">Dashboard</Link>
-          <Link to="/expense" className="hover:underline">Expense</Link>
-          <Link to="/savings" className="hover:underline">Savings</Link>
-          <Link to="/wallet" className="hover:underline">Wallet</Link>
-          <Link to="/insights" className="hover:underline">Insights</Link>
-          <Link to="/alerts" className="hover:underline">Alerts</Link>
-        </div>
-        <div className="flex items-center gap-3">
-          <button className="bg-white/20 px-3 py-1 rounded text-sm">Profile</button>
-        </div>
+        <span className="font-bold text-white">{displayName}</span>
+      </div>
+
+      <div className="flex gap-4">
+        <Link to="/">Dashboard</Link>
+        <Link to="/expenses">Expense</Link>
+        <Link to="/savings">Savings</Link>
+        <Link to="/wallet">Wallet</Link>
+        <Link to="/insights">Insights</Link>
+        <Link to="/fraud">Alerts</Link>
+        <Link
+          to="/profile"
+          className="bg-white text-purple-600 px-3 py-1 rounded"
+        >
+          Profile
+        </Link>
       </div>
     </nav>
   );
