@@ -1,32 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// Pages
-import Dashboard from "./pages/Dashboard";
-import Wallet from "./pages/Wallet";
-import ExpenseTracker from "./pages/ExpenseTracker";
-import FinancialInsights from "./pages/FinancialInsights";
-import Savings from "./pages/Savings";
-import FraudAlerts from "./pages/FraudAlerts";
-
-// Components
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import Dashboard from "./pages/Dashboard";
+import ExpenseTracker from "./pages/ExpenseTracker";
+import Wallet from "./pages/Wallet";
+import FinancialInsights from "./pages/FinancialInsights";
+import FraudAlerts from "./pages/FraudAlerts";
+import Savings from "./pages/Savings";
 
 function App() {
   return (
-    <Router>
-      <div className="bg-gray-900 min-h-screen text-white">
-        <Navbar />
+    <BrowserRouter>
+      <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/wallet" element={<Wallet />} />
-          <Route path="/expenses" element={<ExpenseTracker />} />
-          <Route path="/insights" element={<FinancialInsights />} />
-          <Route path="/savings" element={<Savings />} />
-          <Route path="/fraud" element={<FraudAlerts />} />
-        </Routes>
-      </div>
-    </Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/expenses" element={<ExpenseTracker />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/insights" element={<FinancialInsights />} />
+        <Route path="/fraud" element={<FraudAlerts />} />
+        <Route path="/savings" element={<Savings />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
